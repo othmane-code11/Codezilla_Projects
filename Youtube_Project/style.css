@@ -100,7 +100,7 @@ aside {
     text-decoration: none;
     display: flex;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 0 10px 10px 0;
     margin-right: 5px;
     padding:10px;
 }
@@ -222,4 +222,3 @@ main {
 .title span {
     font-size: 1.1rem;
 }
-
