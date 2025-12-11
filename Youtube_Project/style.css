@@ -51,6 +51,7 @@ header {
     padding : 10px;
     border: 1px solid rgb(131, 129, 129);
     font-size: 15px;
+    border-right: none;
 }
 
 .mid-section button {
@@ -105,16 +106,21 @@ aside {
 }
 
 .content-area aside a:hover {
-    background-color: rgb(224, 226, 228);
+    background-color: rgba(224, 226, 228, 0.405);
 }
 .content-area aside a span {
-    padding: 5px 0 0 20px;
+    padding: 5px 0 5px 20px;
     font-size: 1.4rem;
     font-weight: 500;
 }
 .active {
     background-color: rgb(224, 226, 228);
 }
+
+#active-span {
+    font-weight: bold;
+}
+
 hr {
     margin: 10px;
 }
@@ -129,6 +135,7 @@ nav p {
     display: flex;
     align-items: center;
 }
+
 .channel-img {
     width: 30px;
     height: 30px;
@@ -204,6 +211,15 @@ main {
     display: flex;
     align-items: center;
 }
+.title_span span {
+    padding-bottom: 2px;
+    color: rgb(92, 92, 92);
+}
+
+.video-creator:hover{
+    color: rgb(48, 48, 48);
+}
 .title span {
     font-size: 1.1rem;
 }
+
