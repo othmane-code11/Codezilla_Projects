@@ -1,22 +1,52 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function index () {
-        $allPosts = [
-            ['id' => 1, "title" => "PHP", "Posted_by" => "Othmane", "Created_at" => "2022-10-10 09:00:00"],
-            ['id' => 2, "title" => "JS", "Posted_by" => "YAHYA", "Created_at" => "2022-10-10 09:00:00"],
-            ['id' => 3, "title" => "PYTHON", "Posted_by" => "YOUSSEF", "Created_at" => "2022-10-10 09:00:00"]
-        ];
-        return view('index', ["posts" => $allPosts]);
+        $allPosts = Post::all();
+        return view('posts.index', ["posts" => $allPosts]);
     }
 
     public function show ($postid) {
-        $singlePost = ['id' => 1, "title" => "PHP", "Posted_by" => "Othmane", "Created_at" => "2022-10-10 09:00:00", 'description' => 'This is a PHP description'];
-        return view('show', ['post' => $singlePost]);
+        $singlePost = Post::find($postid);
+        return view('posts.show', ['post' => $singlePost]);
+    }
+
+    public function create() {
+        return view('posts.create');
+    }
+
+    public function store() {
+        $posts = [
+            "title" => request()->title,
+            "description" => request()->description,
+            "posted_by" => request()->posted_by
+        ];
+        Post::create($posts);
+        return to_route('posts.index');
+    }
+
+    public function edit($id) {
+        $post = Post::findOrFail($id);
+        return view('posts.edit', ["post" => $post]);
+    }
+
+    public function update($id) {
+        $post = [
+            "title" => request()->title,
+            "description" => request()->description,
+            "posted_by" => request()->posted_by
+        ];
+        Post::where("id", $id)->update($post);
+        return to_route('posts.show', $id);
+    }
+
+    public function destroy($id) {
+        Post::findOrFail($id)->delete();
+        return to_route("posts.index");
     }
 }
