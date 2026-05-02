@@ -19,9 +19,9 @@ Create
         <div class="form-group">
             <label for="exampleFormControlSelect1">Posted BY</label>
             <select class="form-control" name="posted_by" id="exampleFormControlSelect1">
-                <option>Othmane</option>
-                <option>Yassine</option>
-                <option>Zaid</option>
+                @foreach($users as $user)
+                    <option value="{{ $user->name }}">{{ $user->name }}</option>
+                @endforeach
             </select>
         </div>
         <br>

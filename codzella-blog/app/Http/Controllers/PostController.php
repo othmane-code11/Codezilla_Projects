@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -11,28 +12,29 @@ class PostController extends Controller
         return view('posts.index', ["posts" => $allPosts]);
     }
 
-    public function show ($postid) {
-        $singlePost = Post::find($postid);
-        return view('posts.show', ['post' => $singlePost]);
+    public function show (Post $post) {
+        return view('posts.show', ['post' => $post]);
     }
 
-    public function create() {
-        return view('posts.create');
+    public function create () {
+        $users = User::all();
+        return view('posts.create', ['users' => $users]);
     }
 
     public function store() {
-        $posts = [
+        $post = [
             "title" => request()->title,
             "description" => request()->description,
             "posted_by" => request()->posted_by
         ];
-        Post::create($posts);
+        Post::create($post);
         return to_route('posts.index');
     }
 
-    public function edit($id) {
-        $post = Post::findOrFail($id);
-        return view('posts.edit', ["post" => $post]);
+    public function edit(Post $post) { // type hinting
+        // $post = Post::findOrFail($id);
+        $users = User::all();
+        return view('posts.edit', ["post" => $post, "users" => $users]);
     }
 
     public function update($id) {

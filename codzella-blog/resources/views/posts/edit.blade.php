@@ -9,20 +9,20 @@ Edit
         @method("PUT")
         <div class="form-group">
             <label for="exampleFormControlInput1">Title</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" name="title">
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="title" value="{{ $post->title }}">
         </div>
         <br>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Description</label>
-            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3">{{ $post->description }}</textarea>
         </div>
         <br>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Posted BY</label>
             <select class="form-control" name="posted_by" id="exampleFormControlSelect1">
-                <option>Othmane</option>
-                <option>Yassine</option>
-                <option>Zaid</option>
+                @foreach($users as $user)
+                    <option value="{{ $user->name }}">{{ $user->name }}</option>
+                @endforeach
             </select>
         </div>
         <br>
