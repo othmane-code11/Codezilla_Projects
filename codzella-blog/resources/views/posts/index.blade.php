@@ -8,11 +8,13 @@ Index
         <a href="{{ route('posts.create') }}" class="btn btn-success">Create a Post</a>
     </div>
     @if (count($posts) > 0)
+    @php $counter = 1 @endphp
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
+                <th scope="col">Description</th>
                 <th scope="col">Posted By</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Actions</th>
@@ -21,8 +23,9 @@ Index
         <tbody>
             @foreach ($posts as $post)
                 <tr>
-                    <th scope="row">{{ $post['id'] }}</th>
+                    <th scope="row">{{ $counter++ }}</th>
                     <td>{{ $post['title'] }}</td>
+                    <td>{{ $post['description'] }}</td>
                     <td>{{ $post['posted_by'] }}</td>
                     <td>{{ $post['created_at'] }}</td>
                     <td>
