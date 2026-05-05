@@ -22,12 +22,18 @@ class PostController extends Controller
     }
 
     public function store() {
+        request()->validate([
+            "title" => "required",
+            "description" => "required",
+            "user_id" => "required|exists:users,id"
+        ]);
         $post = [
             "title" => request()->title,
             "description" => request()->description,
-            "posted_by" => request()->posted_by
+            "user_id" => request()->user_id
         ];
         Post::create($post);
+        session()->flash("message", "Post created successfully");
         return to_route('posts.index');
     }
 
@@ -38,17 +44,25 @@ class PostController extends Controller
     }
 
     public function update($id) {
+        request()->validate([
+            "title" => "required",
+            "description" => "required",
+            "user_id" => "required|exists:users,id"
+        ]);
+
         $post = [
             "title" => request()->title,
             "description" => request()->description,
-            "posted_by" => request()->posted_by
+            "user_id" => request()->user_id
         ];
         Post::where("id", $id)->update($post);
+        session()->flash("message", "Post updated successfully");
         return to_route('posts.show', $id);
     }
 
     public function destroy($id) {
         Post::findOrFail($id)->delete();
+        session()->flash("message", "Post deleted successfully");
         return to_route("posts.index");
     }
 }
